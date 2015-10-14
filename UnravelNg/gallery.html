@@ -1,0 +1,139 @@
+<!doctype html>
+<html ng-app ng-controller="PhotosCtrl">
+<meta charset=utf-8>
+<title>Photo Viewer</title>
+
+<style>
+  * { -moz-box-sizing: border-box; box-sizing: border-box; }
+  body {
+    font: 17px/1.5 sans-serif;
+    background: white; color: black;
+    margin: 0; padding: 0;
+  }
+  h1, h2, h3 { margin: 0; font-size: 1.5em; }
+  h1 { font-weight: 100; padding: 0.444em 0.667em; }
+
+  .grid { overflow: hidden; }
+  .box {
+    float: left;
+    height: 33.333333vw;
+    width: 33.333333vw;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+    background: black;
+  }
+  
+  .controls {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  left: 1em;
+  padding: 1em;
+  color: white;
+  background: rgba(0,0,0,.8);
+  font-size: 0.667em;
+  text-transform: uppercase;
+  }
+
+  .controls .field {
+    overflow: hidden;
+    margin-bottom: 0.444em;
+  }
+  .controls .field:last-of-type {
+    margin-bottom: 0;
+  }
+  .controls label {
+    display: inline-block;
+    width: 20%;
+    float: left;
+    margin: 0;
+    line-height: 2;
+  }
+  .controls input {
+    margin: 0;
+    display: inline-block;
+    width: 80%;
+    float: right;
+    background: white;
+    border: none;
+    font: 1em/1.5 sans-serif;
+    padding: 0.298em 0.444em;
+  }
+  
+.filter, .new-photo {
+  z-index: 1000;
+  position: fixed;
+  display: block;
+  opacity: 0.7;
+  -webkit-transition: opacity 100ms linear;
+  -moz-transition: opacity 100ms linear;
+  -o-transition: opacity 100ms linear;
+  -ms-transition: opacity 100ms linear;
+  transition: opacity 100ms linear;
+  }
+  
+  .filter {
+    top: 1em;
+    right: 1em;
+    font: 17px/1.5 sans-serif;
+  }
+  .new-photo {
+    font: 0.667em/1.5 sans-serif;
+    top: 1.5em;
+    right: 25em;
+  }
+  .filter:hover,
+  .filter:focus,
+  .new-photo:hover,
+  .new-photo:focus {
+    opacity: 1;
+  }
+</style>
+
+<h1>Photos, yo.</h1>
+
+<input type="search" ng-model="photoFilter" class="filter" placeholder="Filter&hellip;">
+<button class="new-photo" ng-click="newPhoto()">+ New Photo</button>
+
+<div class="grid">
+  <div class="box" ng-repeat="photo in photos | filter:photoFilter">
+   <img ng-src="{{photo.src}}" ng-click="photo.selected=!photo.selected"
+        ng-class="{'selected':photo.selected}">
+   <div class="controls" ng-show="photo.selected">
+     <div class="photo">
+       <div class="field">
+         <label for="url">URL:</label>
+         <input ng-model="photo.src" name="url" id="url">
+       </div>
+       <div class="field">
+         <label for="tags">Tags:</label>
+         <input ng-list ng-model="photo.tags" name="tags" id="tags">
+       </div>
+     </div>
+   </div>
+</div>
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
+
+<script>
+
+  var PhotosCtrl = function ($scope) {
+    $scope.photos = [
+      { src: '//farm3.staticflickr.com/2871/9096220194_ff9e60d646_z.jpg', tags: ['bird'] },
+      { src: '//farm4.staticflickr.com/3251/3089268872_1869860fbf_z.jpg' },
+      { src: '//farm4.staticflickr.com/3049/3088429317_05a0c51605_z.jpg' },
+      { src: '//farm3.staticflickr.com/2155/2348877473_ec3768d5d9_z.jpg', tags: ['desert'] },
+      { src: '//farm4.staticflickr.com/3044/2348881979_1fd7f979f3_z.jpg', tags: ['valley'] },
+      { src: '//farm3.staticflickr.com/2273/2348882083_d8e3e38f89_z.jpg', tags: ['valley'] },
+    ];
+    
+    $scope.newPhoto = function(){
+      console.log('newphoto!');
+      $scope.photos.unshift({ src: 'https://lorempixum.com/500/500' })
+    }
+  }
+  
+
+</script>

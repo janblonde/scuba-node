@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="events">
+<head>
+  <title>Log (ng-controller)</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    .logItem{
+      background-color: lightblue;
+      border: 2px solid navy;
+      padding: 8px;
+      text-align: center;
+      width: 200px;
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body ng-controller="dragCtrl">
+  <div class="container-fluid">
+    <h1>Drag</h1>
+    <div class="row">
+      <div id="item" class="col-sm-12 logItem"
+           ng-mousedown="mouseDown($event)">
+        Dive Log Entry
+      </div>
+    </div>
+  </div>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="drag.js"></script>
+</body>
+</html>

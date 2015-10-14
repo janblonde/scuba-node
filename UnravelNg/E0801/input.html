@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>Text input</title>
+  <link href="css/bootstrap.css" rel="stylesheet" />
+</head>
+<body style="margin-top:12px;">
+  <div class="alert alert-info" ng-hide="true">The app is being loaded...</div>
+  <div class="container" ng-init="changeCount=0" ng-cloak>
+    <form name="simple">
+      <label class="control-label">Type in a value</label>
+      <input class="form-control"
+             name="myVal"
+             ng-model="myValue"
+             ng-change="changeCount=changeCount+1"
+             ng-required="true"
+             ng-minlength="3"
+             ng-maxlength="9"
+             ng-model-options="{allowInvalid: true}"
+             ng-trim="true"/>
+    </form>
+    <hr/>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td>Value:</td>
+          <td>[{{myValue}}]</td>
+        </tr>
+        <tr>
+          <td>Changes:</td>
+          <td>{{changeCount}}</td>
+        </tr>
+        <tr>
+          <td>Is valid?</td>
+          <td>{{simple.myVal.$valid}}</td>
+        </tr>
+        <tr>
+          <td>Issue with required?</td>
+          <td>{{simple.myVal.$error.required}}</td>
+        </tr>
+        <tr>
+          <td>Issue with minlength?</td>
+          <td>{{simple.myVal.$error.minlength}}</td>
+        </tr>
+        <tr>
+          <td>Issue with maxlength?</td>
+          <td>{{simple.myVal.$error.maxlength}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="angular.min.js"></script>
+  <script>setTimeout(function(){
+    angular.bootstrap(document,[]);
+  },1000);
+  </script>
+</body>
+</html>

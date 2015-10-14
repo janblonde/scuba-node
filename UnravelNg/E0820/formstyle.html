@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form</title>
+  <link href="css/bootstrap.css" rel="stylesheet" />
+  <style>
+    input.ng-invalid-required.ng-touched {
+      border: 2px solid maroon;
+      background-color :lightpink;
+    }
+  </style>
+</head>
+<body style="margin-top:12px;">
+  <div class="alert alert-info" ng-hide="true">The app is being loaded...</div>
+  <div class="container" ng-cloak>
+    <form name="simple" novalidate>
+      <div class="form-group">
+        <label class="control-label">Original "Empty"</label>
+        <input class="form-control"
+               autofocus
+               name="empty1"
+               ng-model="empty1"
+               required/>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Modified "Empty"</label>
+        <input class="form-control"
+               name="empty2"
+               ng-model="empty2"
+               my-empty
+               required/>
+      </div>
+    </form>
+  <script src="angular.min.js"></script>
+  <script>setTimeout(function(){
+    angular.bootstrap(document,['validation']);
+  },1000);
+  </script>
+  <script>
+    angular.module('validation',[])
+      .directive('myEmpty',function(){
+        return{
+          require: 'ngModel',
+          restrict: 'A',
+          link: function(scope, element, attrs, ctrl){
+            ctrl.$isEmpty = function(value){
+              return !angular.isDefined(value)
+              || value ==null
+              || value == ''
+              || value== NaN
+              || value == '-';
+            }  
+          }
+        };
+      });
+  </script>
+</body>
+</html>

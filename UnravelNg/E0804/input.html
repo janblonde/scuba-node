@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Root Scope</title>
+  <link href="css/bootstrap.css" rel="stylesheet" />
+</head>
+<body style="margin-top:12px;">
+  <div class="alert alert-info" ng-hide="true">The app is being loaded...</div>
+  <div class="container" ng-init="nightDive='night';wreckDive=false" ng-cloak>
+    <form name="diveProps">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"
+                 name="nightDive"
+                 ng-model="wreckDive"/>
+          Wreck dive?
+          <span>{{wreckDive}}</span>
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"
+                 name="nightDive"
+                 ng-true-value="'night'"
+                 ng-false-value="'day'"
+                 ng-model="nightDive" />
+          Night dive?
+          {{nightDive}}
+        </label>
+      </div>
+    </form>
+  </div>
+  <script src="angular.min.js"></script>
+  <script>setTimeout(function(){
+    angular.bootstrap(document,[]);
+  },1000);
+  </script>
+</body>
+</html>

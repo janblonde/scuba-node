@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Radio button</title>
+  <link href="css/bootstrap.css" rel="stylesheet" />
+</head>
+<body style="margin-top:12px;">
+  <div class="alert alert-info" ng-hide="true">The app is being loaded...</div>
+  <div class="container" ng-init="gasType='air'" ng-cloak>
+    <form name="diveProps">
+      <div class="radio">
+        <label>
+          <input type="radio"
+                 name="gasType"
+                 ng-model="gasType"
+                 ng-value="'air'" />
+          Air
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio"
+                 name="gasType"
+                 ng-model="gasType"
+                 ng-value="'nitrox'" />
+          Enriched air
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio"
+                 name="gasType"
+                 ng-model="gasType"
+                 ng-value="'trimix'" />
+          Technical gas mix
+        </label>
+      </div>
+      <hr/>
+      <p>The selected gas is: {{gasType}}</p>
+    </form>
+  </div>
+  <script src="angular.min.js"></script>
+  <script>setTimeout(function(){
+    angular.bootstrap(document,[]);
+  },1000);
+  </script>
+</body>
+</html>

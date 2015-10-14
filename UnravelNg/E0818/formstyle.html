@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form</title>
+  <link href="css/bootstrap.css" rel="stylesheet" />
+  <style>
+    input.ng-invalid.ng-touched {
+      border: 2px solid maroon;
+      background-color :lightpink;
+    }
+  </style>
+</head>
+<body style="margin-top:12px;">
+  <div class="alert alert-info" ng-hide="true">The app is being loaded...</div>
+  <div class="container" ng-cloak>
+    <form name="simple" novalidate>
+      <div class="form-group">
+        <label class="control-label">User name</label>
+        <input class="form-control"
+               autofocus
+               name="userName"
+               ng-model="userName"
+               required/>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Email</label>
+        <input class="form-control"
+               name="email"
+               ng-model="email"
+               type="email"
+               required/>
+      </div>
+      <input class="btn btn-primary"
+             type="submit"
+             ng-disabled="simple.$invalid"
+             value="Save"/>
+    </form>
+  <script src="angular.min.js"></script>
+  <script>setTimeout(function(){
+    angular.bootstrap(document,[]);
+  },1000);
+  </script>
+</body>
+</html>
